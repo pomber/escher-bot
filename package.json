@@ -1,0 +1,20 @@
+{
+  "name": "escher-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/pomber/escher-bot.git",
+  "author": "pomber <pombopombopombo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "micro",
+    "deploy": "now --public",
+    "now-rm": "now rm escher-bot"
+  },
+  "dependencies": {
+    "big-integer": "^1.6.28",
+    "dotenv": "^5.0.1",
+    "micro": "^9.3.0",
+    "node-cleanup": "^2.1.2",
+    "twit": "^2.2.9"
+  }
+}

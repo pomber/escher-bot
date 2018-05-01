@@ -1,0 +1,17 @@
+{
+  "alias": "escher-bot",
+  "name": "escher-bot",
+  "env": {
+    "NODE_ENV": "production",
+    "consumer_key": "@escher_consumer_key",
+    "consumer_secret": "@escher_consumer_secret",
+    "access_token": "@escher_access_token",
+    "access_token_secret": "@escher_access_token_secret"
+  },
+  "scale": {
+    "sfo1": {
+      "min": 1,
+      "max": 1
+    }
+  }
+}
