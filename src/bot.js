@@ -70,14 +70,19 @@ const tweet = (count, ids) => {
   newIdInfo.newId = newId;
 
   const status = `Is this tweet recursive? https://twitter.com/${botname}/status/${newId}`;
-  twitter.post("statuses/update", { status }, (err, t, response) => {
-    const actualIdInfo = snowflake.parse(t.id_str);
-    state.workerId = actualIdInfo.workerId;
-    state.datacenterId = actualIdInfo.datacenterId;
-    state[count].delay = actualIdInfo.timestamp - oldIdInfo.timestamp;
-    tweet(count + 1, [...ids, t.id_str]);
-    replyWithStats(oldIdInfo, newIdInfo, actualIdInfo);
-  });
+  twitter.post(
+    "statuses/update",
+    { status, in_reply_to_status_id: newId },
+    (err, t, response) => {
+      if (err) console.log(err);
+      const actualIdInfo = snowflake.parse(t.id_str);
+      state.workerId = actualIdInfo.workerId;
+      state.datacenterId = actualIdInfo.datacenterId;
+      state[count].delay = actualIdInfo.timestamp - oldIdInfo.timestamp;
+      tweet(count + 1, [...ids, t.id_str]);
+      replyWithStats(oldIdInfo, newIdInfo, actualIdInfo);
+    }
+  );
 };
 
 const resetFlag = () => {
@@ -119,7 +124,7 @@ ${workerIdLine}
 ${datacenterIdLine}
 ${timestampLine}
 `;
-  if (newIdInfo.id === actualIdInfo.id) {
+  if (sequenceMatch && workerIdMatch && datacenterIdMatch && timestampMatch) {
     status += `
 🎉🎉 We did it @pomber! 🎉🎉`;
   }
