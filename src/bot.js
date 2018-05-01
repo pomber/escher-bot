@@ -84,7 +84,7 @@ const resetFlag = () => {
   setTimeout(() => {
     shouldTweet = true;
     resetFlag();
-  }, 1 * 60 * 1000);
+  }, 3 * 60 * 1000);
 };
 
 const replyWithStats = (oldIdInfo, newIdInfo, actualIdInfo) => {
